@@ -8,4 +8,11 @@ public class Plateau {
         this.topRightCoordinates = topRightCoordinates;
         this.bottomLeftCoordinates = bottomLeftCoordinates;
     }
+
+    public boolean checkRoverInPlateau(Coordinates currentRoverCoordinates) {
+        return topRightCoordinates.getXCoordinate() >= currentRoverCoordinates.getXCoordinate()
+                && topRightCoordinates.getYCoordinate() >= currentRoverCoordinates.getYCoordinate()
+                && bottomLeftCoordinates.getXCoordinate() <= currentRoverCoordinates.getXCoordinate()
+                && bottomLeftCoordinates.getYCoordinate() <= currentRoverCoordinates.getYCoordinate();
+    }
 }

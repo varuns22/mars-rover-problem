@@ -95,8 +95,40 @@ class MarsRoverTest {
     }
 
     @Test
+    void givenARightTurnCommand_whenRoverFacingNorth_thenSetRoverDirectionToEast() {
+        this.marsRover.runRover("R");
+        Assertions.assertEquals("1 2 E", this.getRoverPosition(this.marsRover));
+    }
+
+    @Test
+    void givenARightTurnCommand_whenRoverFacingSouth_thenSetRoverDirectionToWest() {
+        this.marsRover.currentDirection = Directions.S;
+        this.marsRover.runRover("R");
+        Assertions.assertEquals("1 2 W", this.getRoverPosition(this.marsRover));
+    }
+
+    @Test
+    void givenARightTurnCommand_whenRoverFacingEast_thenSetRoverDirectionToSouth() {
+        this.marsRover.currentDirection = Directions.E;
+        this.marsRover.runRover("R");
+        Assertions.assertEquals("1 2 S", this.getRoverPosition(this.marsRover));
+    }
+
+    @Test
+    void givenARightTurnCommand_whenRoverFacingWest_thenSetRoverDirectionToNorth() {
+        this.marsRover.currentDirection = Directions.W;
+        this.marsRover.runRover("R");
+        Assertions.assertEquals("1 2 N", this.getRoverPosition(this.marsRover));
+    }
+
+    @Test
     void givenAInvalidCommand_thenReturnInvalidCommandError() {
         Assertions.assertThrows(RuntimeException.class, () -> this.marsRover.runRover("S"));
+    }
+
+    @Test
+    void givenAStringOfCommand_whenRoverGoesOutsidePlateau_thenReturnError() {
+        Assertions.assertThrows(RuntimeException.class, () -> this.marsRover.runRover("MMMMMM"));
     }
 
     private void initialise() {

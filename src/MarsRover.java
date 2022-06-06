@@ -40,11 +40,15 @@ public class MarsRover {
      * @param command The command for rover
      */
     public void executeCommand(Character command) {
+
         switch (command) {
             case 'L' -> this.turnLeft();
             case 'M' -> this.moveInSameDirection();
             case 'R' -> this.turnRight();
             default -> throw new RuntimeException("Invalid Command");
+        }
+        if (!plateau.checkRoverInPlateau(this.currentPosition)) {
+            throw new RuntimeException("Rover Cannot be in outside the plateau");
         }
     }
 
@@ -68,6 +72,13 @@ public class MarsRover {
      * This method turns the rover right by 90 degree from the current facing direction.
      */
     private void turnRight() {
+        switch (this.currentDirection) {
+            case N -> this.currentDirection = Directions.E;
+            case S -> this.currentDirection = Directions.W;
+            case E -> this.currentDirection = Directions.S;
+            case W -> this.currentDirection = Directions.N;
+            default -> throw new RuntimeException("Invalid Direction");
+        }
     }
 
     /**
